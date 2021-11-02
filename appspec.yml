@@ -1,0 +1,20 @@
+version: 0.0
+os: windows
+files:
+  - source: \
+    destination: c:\inetpub\wwwroot\DSCC_7417_Build
+  - source: \codedeploy\deletewebsite.ps1
+    destination: c:\temp
+  - source: \codedeploy\installwebsite.ps1
+    destination: c:\temp
+  - source: \codedeploy\deletewebsite.bat
+    destination: c:\temp
+  - source: \codedeploy\installwebsite.bat
+    destination: c:\temp
+hooks:
+  BeforeInstall:
+    - location: \codedeploy\deletewebsite.bat
+      timeout: 180
+  AfterInstall:
+    - location: \codedeploy\installwebsite.bat
+      timeout: 180
